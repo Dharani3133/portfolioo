@@ -6,16 +6,23 @@
     <title>DHARANI M - Electrical Engineer & Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- CSS: The Neon Theme --- */
+        /* --- CSS: The Neon Purple & Red Theme --- */
         :root {
-            --color-dark: #0A0A1F;        /* Deep Dark Blue/Black */
-            --color-dark-alt: #171732;    /* Slightly Lighter Dark */
-            --color-neon-primary: #00FFFF; /* Cyan Neon */
-            --color-neon-secondary: #FF69B4; /* Hot Pink Accent */
-            --color-text-light: #E0E0FF;  /* Off-White for body text */
+            /* Main Backgrounds */
+            --color-dark: #000000;        /* Pure Black Background */
+            --color-dark-alt: #1A001A;    /* Very Dark Purple/Black for sections */
+
+            /* Neon Colors */
+            --color-neon-primary: #CC00FF; /* Bright Purple Neon (Primary) */
+            --color-neon-secondary: #FF0033; /* Bright Red Neon (Accent) */
+
+            /* Text & Glows */
+            --color-text-light: #E8E8FF;  /* Off-White for body text */
             --font-primary: 'Arial', sans-serif;
-            --neon-glow-primary: 0 0 5px var(--color-neon-primary), 0 0 15px var(--color-neon-primary), 0 0 25px var(--color-neon-primary);
-            --neon-glow-secondary: 0 0 5px var(--color-neon-secondary), 0 0 15px var(--color-neon-secondary);
+            
+            /* Glow Effects */
+            --neon-glow-primary: 0 0 7px var(--color-neon-primary), 0 0 20px var(--color-neon-primary), 0 0 30px var(--color-neon-primary);
+            --neon-glow-secondary: 0 0 5px var(--color-neon-secondary), 0 0 15px var(--color-neon-secondary), 0 0 25px var(--color-neon-secondary);
         }
 
         * {
@@ -66,7 +73,7 @@
         header {
             background-color: var(--color-dark-alt);
             padding: 15px 0;
-            border-bottom: 1px solid rgba(0, 255, 255, 0.2); /* Subtle divider */
+            border-bottom: 1px solid rgba(204, 0, 255, 0.3); /* Subtle purple divider */
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -123,6 +130,12 @@
             width: 250px;
             height: 250px;
             flex-shrink: 0;
+            animation: pulse-border 2s infinite alternate; /* Added a subtle animation */
+        }
+        /* Keyframe animation for pulse effect */
+        @keyframes pulse-border {
+            from { box-shadow: 0 0 5px var(--color-neon-primary), 0 0 10px var(--color-neon-primary); }
+            to { box-shadow: 0 0 15px var(--color-neon-primary), 0 0 30px var(--color-neon-primary); }
         }
 
         .profile-image {
@@ -158,22 +171,22 @@
         /* Neon Button Styling */
         .neon-button {
             background: none;
-            border: 2px solid var(--color-neon-primary);
+            border: 2px solid var(--color-neon-secondary); /* Accent border */
             padding: 10px 25px;
             font-size: 1em;
-            color: var(--color-neon-primary);
+            color: var(--color-neon-secondary); /* Accent text */
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
-            box-shadow: var(--neon-glow-primary);
+            box-shadow: var(--neon-glow-secondary);
             transition: all 0.4s ease-in-out;
             border-radius: 5px;
         }
 
         .neon-button:hover {
-            background-color: var(--color-neon-primary);
+            background-color: var(--color-neon-secondary);
             color: var(--color-dark);
-            box-shadow: 0 0 10px var(--color-neon-primary), 0 0 40px var(--color-neon-primary);
+            box-shadow: 0 0 10px var(--color-neon-secondary), 0 0 40px var(--color-neon-secondary);
             transform: scale(1.05);
         }
 
@@ -223,7 +236,7 @@
 
         .skill-category {
             background-color: var(--color-dark);
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid rgba(204, 0, 255, 0.2);
             padding: 25px;
             border-radius: 8px;
         }
@@ -244,7 +257,7 @@
 
         .skill-tag {
             display: inline-block;
-            background-color: rgba(0, 255, 255, 0.1);
+            background-color: rgba(204, 0, 255, 0.1); /* Light purple background */
             color: var(--color-neon-primary);
             padding: 5px 12px;
             border-radius: 20px;
@@ -265,7 +278,7 @@
 
         .project-card:hover {
             transform: translateX(5px);
-            box-shadow: 0 0 10px rgba(255, 105, 180, 0.5); /* Pink shadow on hover */
+            box-shadow: 0 0 10px rgba(255, 0, 51, 0.5); /* Red shadow on hover */
         }
 
         .project-title {
@@ -276,13 +289,8 @@
 
         .project-year {
             font-size: 0.9em;
-            color: var(--color-neon-primary);
+            color: var(--color-neon-secondary); /* Accent color for year */
             margin-left: 10px;
-        }
-
-        .view-more {
-            text-align: center;
-            margin-top: 30px;
         }
 
         /* --- Education Section --- */
@@ -296,7 +304,7 @@
             background-color: var(--color-dark);
             padding: 20px;
             border-radius: 5px;
-            border-top: 2px solid var(--color-neon-primary);
+            border-top: 2px solid var(--color-neon-secondary);
         }
 
         .edu-title {
@@ -322,7 +330,7 @@
 
         .cert-list li::before {
             content: "⚡"; /* Neon bolt/bullet */
-            color: var(--color-neon-secondary);
+            color: var(--color-neon-primary); /* Primary color for bolt */
             position: absolute;
             left: 0;
         }
@@ -333,17 +341,9 @@
             margin-bottom: 40px;
         }
 
-        .contact-info p {
-            margin: 10px 0;
-        }
-
-        .contact-link {
-            font-size: 1.1em;
-        }
-
         .contact-icon {
             margin-right: 10px;
-            color: var(--color-neon-secondary);
+            color: var(--color-neon-secondary); /* Accent color for icons */
         }
 
         .contact-form {
@@ -370,7 +370,7 @@
         .contact-form textarea:focus {
             outline: none;
             border-color: var(--color-neon-secondary);
-            box-shadow: 0 0 8px rgba(255, 105, 180, 0.7);
+            box-shadow: 0 0 8px rgba(255, 0, 51, 0.7);
         }
 
         .contact-form textarea {
@@ -382,7 +382,7 @@
         footer {
             text-align: center;
             padding: 20px 0;
-            border-top: 1px solid rgba(0, 255, 255, 0.1);
+            border-top: 1px solid rgba(204, 0, 255, 0.1);
             background-color: var(--color-dark-alt);
             font-size: 0.9em;
         }
@@ -422,7 +422,7 @@
 
     <header class="neon-bg">
         <div class="container">
-            <h1 class="neon-text">DHARANI M </h1>
+            [cite_start]<h1 class="neon-text">DHARANI M [cite: 1]</h1>
             <nav>
                 <ul>
                     <li><a href="#about" class="neon-link">About</a></li>
@@ -442,10 +442,10 @@
                     <img src="Pic.jpg" alt="Dharani M Profile Picture" class="profile-image">
                 </div>
                 <div class="hero-text">
-                    <p class="subtitle neon-text-light">Electrical and Electronics Engineering Graduate </p>
-                    <h2 class="title">Seeking a role in Data Analysis & Front-End Development.</h2>
+                    [cite_start]<p class="subtitle neon-text-light">Electrical and Electronics Engineering Graduate [cite: 2]</p>
+                    [cite_start]<h2 class="title">Seeking a role in **Data Analysis** & **Front-End Development**[cite: 7].</h2>
                     <p class="career-objective">
-                        Electrical and Electronic Engineering graduate with a strong IT foundation , skilled in data interpretation, SQL, and creating responsive web interfaces using HTML, CSS, and JavaScript.
+                        [cite_start]Electrical and Electronic Engineering graduate with a strong IT foundation [cite: 7][cite_start], skilled in data interpretation, SQL, and creating responsive web interfaces using HTML, CSS, and JavaScript[cite: 8].
                     </p>
                     <a href="#contact" class="cta-button neon-button">Let's Connect</a>
                 </div>
@@ -455,19 +455,19 @@
 
     <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title neon-text">AREAS OF FOCUS </h2>
+            [cite_start]<h2 class="section-title neon-text">AREAS OF FOCUS [cite: 11]</h2>
             <div class="focus-grid">
                 <div class="focus-item">
                     <i class="fas fa-chart-line focus-icon neon-glow"></i>
-                    <h3>Data Analyst </h3>
+                    [cite_start]<h3>Data Analyst [cite: 13]</h3>
                 </div>
                 <div class="focus-item">
                     <i class="fas fa-laptop-code focus-icon neon-glow"></i>
-                    <h3>Web development </h3>
+                    [cite_start]<h3>Web development [cite: 14]</h3>
                 </div>
                 <div class="focus-item">
                     <i class="fas fa-drafting-compass focus-icon neon-glow"></i>
-                    <h3>UI/UX Design </h3>
+                    [cite_start]<h3>UI/UX Design [cite: 43]</h3>
                     <p class="small-text">(Hobby)</p>
                 </div>
             </div>
@@ -476,37 +476,37 @@
 
     <section id="skills" class="section dark-bg-alt">
         <div class="container">
-            <h2 class="section-title neon-text">TECHNICAL SKILLS </h2>
+            [cite_start]<h2 class="section-title neon-text">TECHNICAL SKILLS [cite: 15]</h2>
             <div class="skills-grid">
                 <div class="skill-category">
                     <h3 class="category-title neon-text-light">Programming & Data</h3>
                     <ul class="skill-list">
-                        <li><span class="skill-tag">Python </span></li>
-                        <li><span class="skill-tag">SQL </span></li>
-                        <li><span class="skill-tag">Pandas </span></li>
-                        <li><span class="skill-tag">NumPy </span></li>
-                        <li><span class="skill-tag">Matplotlib </span></li>
+                        [cite_start]<li><span class="skill-tag">Python [cite: 16]</span></li>
+                        [cite_start]<li><span class="skill-tag">SQL [cite: 16]</span></li>
+                        [cite_start]<li><span class="skill-tag">Pandas [cite: 17]</span></li>
+                        [cite_start]<li><span class="skill-tag">NumPy [cite: 17]</span></li>
+                        [cite_start]<li><span class="skill-tag">Matplotlib [cite: 17]</span></li>
                     </ul>
                 </div>
                 <div class="skill-category">
                     <h3 class="category-title neon-text-light">Web & Front-End</h3>
                     <ul class="skill-list">
-                        <li><span class="skill-tag">HTML5 </span></li>
-                        <li><span class="skill-tag">CSS3 </span></li>
-                        <li><span class="skill-tag">JavaScript </span></li>
-                        <li><span class="skill-tag">Bootstrap </span></li>
-                        <li><span class="skill-tag">React.js </span></li>
-                        <li><span class="skill-tag">Responsive Web Design </span></li>
+                        [cite_start]<li><span class="skill-tag">HTML5 [cite: 19]</span></li>
+                        [cite_start]<li><span class="skill-tag">CSS3 [cite: 19]</span></li>
+                        [cite_start]<li><span class="skill-tag">JavaScript [cite: 19]</span></li>
+                        [cite_start]<li><span class="skill-tag">Bootstrap [cite: 19]</span></li>
+                        [cite_start]<li><span class="skill-tag">React.js [cite: 19]</span></li>
+                        [cite_start]<li><span class="skill-tag">Responsive Web Design [cite: 22]</span></li>
                     </ul>
                 </div>
                 <div class="skill-category">
                     <h3 class="category-title neon-text-light">Tools & Databases</h3>
                     <ul class="skill-list">
-                        <li><span class="skill-tag">Power BI </span></li>
-                        <li><span class="skill-tag">Tableau </span></li>
-                        <li><span class="skill-tag">MySQL </span></li>
-                        <li><span class="skill-tag">PostgreSQL </span></li>
-                        <li><span class="skill-tag">Git, GitHub </span></li>
+                        [cite_start]<li><span class="skill-tag">Power BI [cite: 17]</span></li>
+                        [cite_start]<li><span class="skill-tag">Tableau [cite: 17]</span></li>
+                        [cite_start]<li><span class="skill-tag">MySQL [cite: 18]</span></li>
+                        [cite_start]<li><span class="skill-tag">PostgreSQL [cite: 18]</span></li>
+                        [cite_start]<li><span class="skill-tag">Git, GitHub [cite: 20]</span></li>
                     </ul>
                 </div>
             </div>
@@ -515,26 +515,26 @@
 
     <section id="projects" class="section">
         <div class="container">
-            <h2 class="section-title neon-text">FEATURED PROJECTS </h2>
+            [cite_start]<h2 class="section-title neon-text">FEATURED PROJECTS [cite: 27]</h2>
 
             <div class="project-card neon-border">
-                <h3 class="project-title">CdTe/Cds based solar cell with Al-ZnO buffer layer using SCAPS-1D <span class="project-year">(2024-Completed) </span></h3>
+                [cite_start]<h3 class="project-title">CdTe/Cds based solar cell with Al-ZnO buffer layer using SCAPS-1D <span class="project-year">(2024-Completed) [cite: 29]</span></h3>
                 <p class="project-description">
-                    Simulated CdTe/CdS solar cells with Al-ZnO buffer layer using SCAPS-1D to enhance efficiency and analyze charge carrier transport.
+                    [cite_start]Simulated CdTe/CdS solar cells with Al-ZnO buffer layer using SCAPS-1D to enhance efficiency and analyze charge carrier transport[cite: 30].
                 </p>
             </div>
 
             <div class="project-card neon-border">
-                <h3 class="project-title">A Novel Street Light with Surveillance <span class="project-year">(2023-Completed) </span></h3>
+                [cite_start]<h3 class="project-title">A Novel Street Light with Surveillance <span class="project-year">(2023-Completed) [cite: 32]</span></h3>
                 <p class="project-description">
-                    Developed a solar-powered street light system with fault detection, real-time monitoring, surveillance, and power consumption estimation using ESP32 and Arduino.
+                    [cite_start]Developed a solar-powered street light system with fault detection, real-time monitoring, surveillance, and power consumption estimation using ESP32 and Arduino[cite: 33].
                 </p>
             </div>
 
             <div class="project-card neon-border">
-                <h3 class="project-title">IoT Based Dual Axis Solar Tracking System <span class="project-year">(2022-Completed) </span></h3>
+                [cite_start]<h3 class="project-title">IoT Based Dual Axis Solar Tracking System <span class="project-year">(2022-Completed) [cite: 35]</span></h3>
                 <p class="project-description">
-                    Designed and developed a dual-axis solar tracker using Arduino and servo motors, achieving 81.68% higher efficiency compared to static panels.
+                    [cite_start]Designed and developed a dual-axis solar tracker using Arduino and servo motors, achieving **81.68% higher efficiency** compared to static panels[cite: 36].
                 </p>
             </div>
         </div>
@@ -546,24 +546,24 @@
 
             <div class="education-grid">
                 <div class="edu-item">
-                    <h3 class="edu-title">B.E - Electrical and Electronics Engineering </h3>
-                    <p class="edu-detail">Sri Ramakrishna Engineering College, Coimbatore </p>
-                    <p class="edu-detail">2020-2024 CGPA: 7.94 </p>
+                    [cite_start]<h3 class="edu-title">B.E - Electrical and Electronics Engineering [cite: 10]</h3>
+                    [cite_start]<p class="edu-detail">Sri Ramakrishna Engineering College, Coimbatore [cite: 10]</p>
+                    <p class="edu-detail">2020-2024 | [cite_start]CGPA: 7.94 [cite: 10]</p>
                 </div>
                 <div class="edu-item">
-                    <h3 class="edu-title">Certifications </h3>
+                    [cite_start]<h3 class="edu-title">Certifications [cite: 23]</h3>
                     <ul class="cert-list">
-                        <li>Artificial Intelligence </li>
-                        <li>Cloud Computing </li>
-                        <li>Robotics Process Automation </li>
+                        [cite_start]<li>Artificial Intelligence [cite: 24]</li>
+                        [cite_start]<li>Cloud Computing [cite: 25]</li>
+                        [cite_start]<li>Robotics Process Automation [cite: 26]</li>
                     </ul>
                 </div>
                 <div class="edu-item">
-                    <h3 class="edu-title">Industrial Internships </h3>
+                    [cite_start]<h3 class="edu-title">Industrial Internships [cite: 37]</h3>
                     <ul class="cert-list">
-                        <li>15 Days Internship on CRI Pumps.</li>
-                        <li>15 Days Internship on RR Rewinding.</li>
-                        <li>15 Days Internship on KPR Industrials.</li>
+                        [cite_start]<li>15 Days Internship on CRI Pumps[cite: 39].</li>
+                        [cite_start]<li>15 Days Internship on RR Rewinding[cite: 40].</li>
+                        [cite_start]<li>15 Days Internship on KPR Industrials[cite: 41].</li>
                     </ul>
                 </div>
             </div>
@@ -576,17 +576,17 @@
             <div class="contact-info">
                 <p>
                     <a href="mailto:dharanimuthuselvan31@gmail.com" class="contact-link neon-link">
-                        <i class="fas fa-envelope contact-icon"></i> dharanimuthuselvan31@gmail.com 
+                        [cite_start]<i class="fas fa-envelope contact-icon"></i> dharanimuthuselvan31@gmail.com [cite: 4]
                     </a>
                 </p>
                 <p>
                     <a href="tel:+917904631827" class="contact-link neon-link">
-                        <i class="fas fa-phone contact-icon"></i> +91 7904631827 
+                        [cite_start]<i class="fas fa-phone contact-icon"></i> +91 7904631827 [cite: 3]
                     </a>
                 </p>
                 <p>
                     <a href="https://www.linkedin.com/in/dharani31" target="_blank" class="contact-link neon-link">
-                        <i class="fab fa-linkedin contact-icon"></i> linkedin.com/in/dharani31 
+                        [cite_start]<i class="fab fa-linkedin contact-icon"></i> linkedin.com/in/dharani31 [cite: 5]
                     </a>
                 </p>
             </div>
@@ -602,7 +602,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Dharani M. Built with <span class="neon-text-light">Passion</span>. | Languages Known: English, Tamil, Hindi, Malayalam.</p>
+            <p>&copy; 2025 Dharani M. Built with <span class="neon-text-light">Passion</span>. | [cite_start]Languages Known: English, Tamil, Hindi, Malayalam[cite: 43].</p>
         </div>
     </footer>
 
@@ -641,4 +641,3 @@
     </script>
 </body>
 </html>
-
