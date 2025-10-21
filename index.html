@@ -69,7 +69,7 @@
             border-bottom: 1px solid var(--neon-blue);
             box-shadow: var(--border-glow);
             /* Add transition for smooth hiding on mobile */
-            transition: all 0.3s ease-in-out, max-height 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out, max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
         }
 
         nav {
@@ -317,7 +317,7 @@
                 padding: 8px 0;
             }
 
-            /* NEW: Hide the entire header when scrolled on mobile */
+            /* NEW: Hide the entire header when scrolled down on mobile */
             header.scrolled {
                 /* Collapse the header vertically */
                 max-height: 0;
@@ -564,7 +564,7 @@
         const hiddenElements = document.querySelectorAll('.hidden');
         hiddenElements.forEach((el) => observer.observe(el));
 
-        // Scroll detection for mobile header hide
+        // Scroll detection for mobile header hide/show
         const header = document.getElementById('main-header');
         // Define the mobile screen threshold
         const mobileMediaQuery = window.matchMedia('(max-width: 588px)');
