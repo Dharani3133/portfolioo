@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dharani M | Neon Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJTMV2fGOS6cblp43I03UnfXyU8e7T/0A+v+Yl4X/jT5W6jD04m84uP3P1/w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         :root {
             --neon-pink: #f000ff;
@@ -70,17 +71,6 @@
             transition: all 0.3s ease-in-out;
         }
 
-        /* NEW: Desktop Header Shrink on Scroll */
-        header.desktop-scrolled nav {
-            padding: 0.5rem 1.5rem; /* Reduce vertical padding */
-            min-height: 50px;
-        }
-        
-        header.desktop-scrolled nav .logo {
-            font-size: 1.5rem; /* Slightly smaller logo */
-        }
-        /* End NEW Desktop Header Shrink */
-
         nav {
             max-width: 1200px;
             margin: 0 auto;
@@ -89,7 +79,14 @@
             align-items: center;
             padding: 1rem 1.5rem;
             min-height: 60px;
-            transition: all 0.3s ease-in-out; /* Added for desktop shrink */
+        }
+
+        /* NEW: Container for logo and menu icon on mobile */
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%; /* Important for mobile layout */
         }
 
         nav .logo {
@@ -97,7 +94,20 @@
             font-weight: 700;
             color: var(--light-text);
             text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
-            transition: font-size 0.3s ease-in-out; /* Added for desktop shrink */
+            transition: all 0.3s ease;
+        }
+
+        /* NEW: Hamburger button styling */
+        .menu-toggle {
+            display: none; /* Hide by default on desktop */
+            background: none;
+            border: none;
+            color: var(--neon-blue);
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 5px;
+            text-shadow: 0 0 5px var(--neon-blue);
+            transition: all 0.3s ease;
         }
 
         nav ul {
@@ -105,7 +115,7 @@
             display: flex;
             gap: 25px;
             visibility: visible;
-            max-height: 1000px;
+            max-height: 1000px; 
             overflow: hidden;
             transition: max-height 0.5s ease-in-out, visibility 0.5s ease-in-out;
         }
@@ -218,8 +228,6 @@
             box-shadow: var(--border-glow);
             backdrop-filter: blur(5px);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex; /* Added for consistent card height in projects */
-            flex-direction: column; /* Added for consistent card height in projects */
         }
 
         .card:hover {
@@ -299,25 +307,50 @@
         /* 🔽 Responsive Styles for Screens <= 588px (Mobile) */
         @media screen and (max-width: 588px) {
             nav {
-                flex-direction: column;
+                flex-direction: column; /* Stack logo/toggle and menu */
                 align-items: flex-start;
                 padding: 1rem;
-                padding-bottom: 10px;
-                /* Reset desktop shrink padding/min-height for mobile */
-                min-height: 60px;
+                min-height: auto;
+            }
+            
+            /* Show the toggle button on mobile */
+            .menu-toggle {
+                display: block;
+            }
+
+            /* The logo and toggle button are now in the .nav-header, making them single line */
+            .nav-header {
+                /* Ensures header content is centered/spaced even when nav direction is column */
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
             }
 
             nav .logo {
                 font-size: 1.5rem;
-                margin-bottom: 10px;
+                margin-bottom: 0; /* Remove margin */
             }
 
             nav ul {
                 flex-direction: column;
                 gap: 15px;
                 width: 100%;
+                /* Default/Closed state on mobile */
+                max-height: 0;
+                visibility: hidden;
+                pointer-events: none;
+                padding-top: 0;
+                padding-bottom: 0;
+                margin-top: 0;
+            }
+
+            /* Open state for mobile menu */
+            nav ul.open {
+                max-height: 250px; /* Adjust to fit content */
                 visibility: visible;
-                max-height: 250px;
+                pointer-events: auto;
+                padding-top: 10px; /* Add some padding back */
             }
 
             nav ul li {
@@ -329,38 +362,13 @@
                 width: 100%;
                 padding: 8px 0;
             }
-
-            /* Mobile: Class added by JavaScript on scroll */
-            header.scrolled nav ul {
-                /* Collapse the navigation menu */
-                max-height: 0;
-                visibility: hidden;
-                pointer-events: none; /* Disable clicking hidden links */
-                padding-top: 0;
-                padding-bottom: 0;
-                margin-top: 0;
-            }
             
-            header.scrolled nav {
-                /* Re-center and adjust padding/height for the logo-only view */
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                padding: 1rem 1.5rem;
-                min-height: auto;
-            }
-            
-            header.scrolled nav .logo {
-                margin-bottom: 0;
-                font-size: 1.8rem; /* Restore slightly larger logo for the sticky header */
+            /* The 'scrolled' class is only used to make the header background fully solid */
+            header.scrolled {
+                background: var(--dark-bg);
             }
 
-            /* Ensure no desktop-scrolled styles interfere on mobile */
-            header.desktop-scrolled {
-                /* Reset any desktop-specific styles */
-                background: rgba(13, 2, 33, 0.8);
-            }
-
+            /* The rest of your mobile styles remain, with minor adjustments */
             .hero-content h1 {
                 font-size: 2.2rem;
             }
@@ -433,7 +441,12 @@
 
     <header id="main-header">
         <nav>
-            <div class="logo">Dharani M</div>
+            <div class="nav-header">
+                <div class="logo">Dharani M</div>
+                <button class="menu-toggle" aria-label="Toggle navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
             <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -559,22 +572,24 @@
     </footer>
 
     <script>
-        // Smooth scroll for navigation links
+        // Smooth scroll for navigation links and menu close on mobile click
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                // Close mobile menu on click, regardless of scroll state
-                if (mediaQuery.matches) {
-                    header.classList.remove('scrolled');
-                }
                 
+                // Close the menu if it's open (for mobile)
+                if (mediaQuery.matches) {
+                    navUl.classList.remove('open');
+                    updateMenuIcon(false);
+                }
+
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
             });
         });
 
-        // Intersection Observer for fade-in effect
+        // Intersection Observer for fade-in effect (kept from original)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -586,46 +601,55 @@
         const hiddenElements = document.querySelectorAll('.hidden');
         hiddenElements.forEach((el) => observer.observe(el));
 
-        // Scroll detection for header adjustments on mobile and desktop
+        // NEW/MODIFIED: Mobile Menu Toggle Logic
         const header = document.getElementById('main-header');
-        // Define the screen size for mobile view (matches your CSS media query)
-        const mobileMediaQuery = window.matchMedia('(max-width: 588px)');
-        const scrollThreshold = 100; // Pixels to scroll before the header changes
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navUl = document.querySelector('nav ul');
+        const mediaQuery = window.matchMedia('(max-width: 588px)');
 
-        function handleHeaderScroll() {
-            const isScrolled = window.scrollY > scrollThreshold;
-
-            if (mobileMediaQuery.matches) {
-                // MOBILE VIEW: Collapse navigation
-                if (isScrolled) {
-                    header.classList.add('scrolled');
-                    header.classList.remove('desktop-scrolled'); // Clear desktop style
-                } else {
-                    header.classList.remove('scrolled');
-                }
+        // Function to change the icon (Hamburger <-> X)
+        function updateMenuIcon(isOpen) {
+            const icon = menuToggle.querySelector('i');
+            if (isOpen) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times'); // 'X' icon
             } else {
-                // DESKTOP/LARGER VIEW: Subtly shrink header
-                if (isScrolled) {
-                    header.classList.add('desktop-scrolled');
-                    header.classList.remove('scrolled'); // Clear mobile style
-                } else {
-                    header.classList.remove('desktop-scrolled');
-                }
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars'); // Hamburger icon
             }
         }
 
-        // Run on initial load and whenever the user scrolls
+        // Handle menu toggle button click
+        menuToggle.addEventListener('click', () => {
+            const isOpen = navUl.classList.toggle('open');
+            updateMenuIcon(isOpen);
+        });
+
+        // Logic for making the header background solid on scroll (applied to both mobile/desktop for smoothness)
+        function handleHeaderScroll() {
+            // Apply a class if scrolled down for visual change (like solid background)
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            // On non-mobile screens, ensure the toggle button is hidden
+            if (!mediaQuery.matches) {
+                menuToggle.style.display = 'none';
+                navUl.classList.remove('open'); // Ensure mobile menu state is cleared
+            } else {
+                // On mobile screens, ensure the toggle button is shown and the menu remains controlled by the button
+                menuToggle.style.display = 'block';
+            }
+        }
+
+        // Initialize and attach listeners
         handleHeaderScroll();
         window.addEventListener('scroll', handleHeaderScroll);
         
-        // Also run if the screen size changes to/from mobile
-        mobileMediaQuery.addEventListener('change', handleHeaderScroll);
-
-        // Toggle mobile menu on initial load if screen is mobile (optional, ensures correct state)
-        if (mobileMediaQuery.matches && window.scrollY <= scrollThreshold) {
-            header.classList.remove('scrolled');
-        }
-
+        // This resets the menu display when switching between mobile/desktop views
+        mediaQuery.addEventListener('change', handleHeaderScroll);
     </script>
 </body>
 </html>
