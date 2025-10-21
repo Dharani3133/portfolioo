@@ -59,6 +59,7 @@
             transform: translateY(0);
         }
 
+        /* DEFAULT HEADER STYLES (Applies to Desktop and Mobile when at the top) */
         header {
             background: rgba(13, 2, 33, 0.8);
             backdrop-filter: blur(10px);
@@ -67,8 +68,8 @@
             z-index: 100;
             border-bottom: 1px solid var(--neon-blue);
             box-shadow: var(--border-glow);
-            /* Add transition for smooth height change on scroll-down mobile view */
-            transition: all 0.3s ease-in-out;
+            /* Add transition for smooth hiding on mobile */
+            transition: all 0.3s ease-in-out, max-height 0.3s ease-in-out;
         }
 
         nav {
@@ -78,8 +79,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 1.5rem;
-            /* Added min-height to ensure the logo is visible before scroll */
             min-height: 60px; 
+            transition: all 0.3s ease-in-out;
         }
 
         nav .logo {
@@ -93,9 +94,8 @@
             list-style: none;
             display: flex;
             gap: 25px;
-            /* Ensure nav links are visible on desktop */
             visibility: visible;
-            max-height: 1000px; /* Large value for smooth transition on mobile */
+            max-height: 1000px;
             overflow: hidden;
             transition: max-height 0.5s ease-in-out, visibility 0.5s ease-in-out;
         }
@@ -112,6 +112,7 @@
             text-shadow: 0 0 5px var(--neon-blue);
         }
 
+        /* MAIN CONTENT STYLES */
         section {
             padding: 80px 20px;
             max-width: 1100px;
@@ -290,7 +291,6 @@
                 flex-direction: column;
                 align-items: flex-start;
                 padding: 1rem;
-                /* Adjust padding to look better when collapsed */
                 padding-bottom: 10px; 
             }
 
@@ -303,7 +303,6 @@
                 flex-direction: column;
                 gap: 15px;
                 width: 100%;
-                /* Default state on mobile when not scrolled down */
                 visibility: visible; 
                 max-height: 250px; 
             }
@@ -318,26 +317,29 @@
                 padding: 8px 0;
             }
 
-            /* NEW: Class added by JavaScript on scroll */
-            header.scrolled nav ul {
-                /* Collapse the navigation menu */
+            /* NEW: Hide the entire header when scrolled on mobile */
+            header.scrolled {
+                /* Collapse the header vertically */
                 max-height: 0;
-                visibility: hidden;
-                pointer-events: none; /* Disable clicking hidden links */
-                padding-top: 0;
-                padding-bottom: 0;
-                margin-top: 0;
+                padding: 0;
+                border-bottom: none;
+                box-shadow: none;
+                overflow: hidden;
+                /* Fade out and disable clicks */
+                opacity: 0;
+                pointer-events: none;
+                /* Ensure quick and smooth transition when hiding */
+                transition: max-height 0.3s ease-in-out, 
+                            padding 0.3s ease-in-out, 
+                            opacity 0.3s ease-in-out;
             }
-            
+
+            /* Reset nav container layout when scrolled, although it is now hidden with the parent */
             header.scrolled nav {
-                /* Re-center and adjust padding/height for the logo-only view */
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                padding: 1rem 1.5rem;
-                min-height: auto;
+                padding: 0;
+                min-height: 0;
             }
-            
+
             header.scrolled nav .logo {
                 margin-bottom: 0;
             }
@@ -562,17 +564,30 @@
         const hiddenElements = document.querySelectorAll('.hidden');
         hiddenElements.forEach((el) => observer.observe(el));
 
-        // NEW: Scroll detection for mobile header collapse
+        // Scroll detection for mobile header hide
         const header = document.getElementById('main-header');
-        const mediaQuery = window.matchMedia('(max-width: 588px)');
+        // Define the mobile screen threshold
+        const mobileMediaQuery = window.matchMedia('(max-width: 588px)');
+        // Define scroll threshold to trigger the hiding effect
+        let scrollThreshold = 100;
+        let lastScrollY = window.scrollY;
 
         function handleHeaderScroll() {
-            // Check if it's a mobile screen AND the user has scrolled past a small threshold
-            if (mediaQuery.matches && window.scrollY > 100) { 
-                header.classList.add('scrolled');
+            // Only apply the hiding/showing logic on mobile screens
+            if (mobileMediaQuery.matches) {
+                if (window.scrollY > lastScrollY && window.scrollY > scrollThreshold) { 
+                    // Scrolling down (hide header)
+                    header.classList.add('scrolled');
+                } else if (window.scrollY < lastScrollY || window.scrollY <= scrollThreshold) {
+                    // Scrolling up OR scrolled back to the top (show header)
+                    header.classList.remove('scrolled');
+                }
             } else {
+                // On desktop, ensure the 'scrolled' class is always removed
                 header.classList.remove('scrolled');
             }
+            
+            lastScrollY = window.scrollY;
         }
 
         // Run on initial load and whenever the user scrolls
@@ -580,9 +595,8 @@
         window.addEventListener('scroll', handleHeaderScroll);
         
         // Also run if the screen size changes to/from mobile
-        mediaQuery.addEventListener('change', handleHeaderScroll);
+        mobileMediaQuery.addEventListener('change', handleHeaderScroll);
 
     </script>
 </body>
 </html>
-
