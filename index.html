@@ -564,13 +564,16 @@
 
         // NEW: Scroll detection for mobile header collapse
         const header = document.getElementById('main-header');
-        const mediaQuery = window.matchMedia('(max-width: 588px)');
+        // This is the media query that defines a "mobile screen"
+        const mediaQuery = window.matchMedia('(max-width: 588px)'); 
 
         function handleHeaderScroll() {
-            // Check if it's a mobile screen AND the user has scrolled past a small threshold
+            // Check if it's a mobile screen (<= 588px) AND the user has scrolled down (window.scrollY > 100)
             if (mediaQuery.matches && window.scrollY > 100) { 
+                // Adds the 'scrolled' class, which collapses the navigation <ul> via CSS
                 header.classList.add('scrolled');
             } else {
+                // Removes the 'scrolled' class, which expands the navigation <ul> via CSS
                 header.classList.remove('scrolled');
             }
         }
