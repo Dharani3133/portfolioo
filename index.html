@@ -67,6 +67,8 @@
             z-index: 100;
             border-bottom: 1px solid var(--neon-blue);
             box-shadow: var(--border-glow);
+            /* Add transition for smooth height change on scroll-down mobile view */
+            transition: all 0.3s ease-in-out;
         }
 
         nav {
@@ -76,6 +78,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 1.5rem;
+            /* Added min-height to ensure the logo is visible before scroll */
+            min-height: 60px; 
         }
 
         nav .logo {
@@ -89,6 +93,11 @@
             list-style: none;
             display: flex;
             gap: 25px;
+            /* Ensure nav links are visible on desktop */
+            visibility: visible;
+            max-height: 1000px; /* Large value for smooth transition on mobile */
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, visibility 0.5s ease-in-out;
         }
 
         nav a {
@@ -281,6 +290,8 @@
                 flex-direction: column;
                 align-items: flex-start;
                 padding: 1rem;
+                /* Adjust padding to look better when collapsed */
+                padding-bottom: 10px; 
             }
 
             nav .logo {
@@ -292,6 +303,9 @@
                 flex-direction: column;
                 gap: 15px;
                 width: 100%;
+                /* Default state on mobile when not scrolled down */
+                visibility: visible; 
+                max-height: 250px; 
             }
 
             nav ul li {
@@ -302,6 +316,30 @@
                 display: block;
                 width: 100%;
                 padding: 8px 0;
+            }
+
+            /* NEW: Class added by JavaScript on scroll */
+            header.scrolled nav ul {
+                /* Collapse the navigation menu */
+                max-height: 0;
+                visibility: hidden;
+                pointer-events: none; /* Disable clicking hidden links */
+                padding-top: 0;
+                padding-bottom: 0;
+                margin-top: 0;
+            }
+            
+            header.scrolled nav {
+                /* Re-center and adjust padding/height for the logo-only view */
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                padding: 1rem 1.5rem;
+                min-height: auto;
+            }
+            
+            header.scrolled nav .logo {
+                margin-bottom: 0;
             }
 
             .hero-content h1 {
@@ -374,7 +412,7 @@
 </head>
 <body>
 
-    <header>
+    <header id="main-header">
         <nav>
             <div class="logo">Dharani M</div>
             <ul>
@@ -502,6 +540,7 @@
     </footer>
 
     <script>
+        // Smooth scroll for navigation links
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -511,6 +550,7 @@
             });
         });
 
+        // Intersection Observer for fade-in effect
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -521,6 +561,27 @@
 
         const hiddenElements = document.querySelectorAll('.hidden');
         hiddenElements.forEach((el) => observer.observe(el));
+
+        // NEW: Scroll detection for mobile header collapse
+        const header = document.getElementById('main-header');
+        const mediaQuery = window.matchMedia('(max-width: 588px)');
+
+        function handleHeaderScroll() {
+            // Check if it's a mobile screen AND the user has scrolled past a small threshold
+            if (mediaQuery.matches && window.scrollY > 100) { 
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+
+        // Run on initial load and whenever the user scrolls
+        handleHeaderScroll(); 
+        window.addEventListener('scroll', handleHeaderScroll);
+        
+        // Also run if the screen size changes to/from mobile
+        mediaQuery.addEventListener('change', handleHeaderScroll);
+
     </script>
 </body>
 </html>
