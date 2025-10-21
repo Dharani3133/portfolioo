@@ -10,11 +10,11 @@
         :root {
             /* Main Backgrounds */
             --color-dark: #000000;        /* Pure Black Background */
-            --color-dark-alt: #5c155c;    /* Very Dark Purple/Black for sections */
+            --color-dark-alt: #090c35;    /* Very Dark Purple/Black for sections */
 
-            /* Neon Colors (Note: Primary is nearly white/light for high contrast, Secondary is deep blue) */
-            --color-neon-primary: hsl(0, 33%, 99%); /* Bright Purple Neon (Primary - White/Light) */
-            --color-neon-secondary: #3d69bb; /* Bright Red Neon (Accent - Deep Blue) */
+            /* Neon Colors */
+            --color-neon-primary: hsl(0, 33%, 99%); /* Bright Purple Neon (Primary) */
+            --color-neon-secondary: #3d69bb; /* Bright Red Neon (Accent) */
 
             /* Text & Glows */
             --color-text-light: #E8E8FF;  /* Off-White for body text */
@@ -127,14 +127,11 @@
             box-shadow: var(--neon-glow-primary);
             border-radius: 50%;
             overflow: hidden;
-            /* UPDATED SIZE HERE */
-            width: 320px;
-            height: 320px;
-            /* END UPDATED SIZE */
+            width: 250px;
+            height: 250px;
             flex-shrink: 0;
             animation: pulse-border 2s infinite alternate; /* Added a subtle animation */
         }
-        
         /* Keyframe animation for pulse effect */
         @keyframes pulse-border {
             from { box-shadow: 0 0 5px var(--color-neon-primary), 0 0 10px var(--color-neon-primary); }
@@ -397,13 +394,6 @@
                 gap: 30px;
             }
 
-            /* Adjusted size for mobile screens */
-            .profile-image-container {
-                width: 250px;
-                height: 250px;
-            }
-            /* End Adjustment */
-
             .hero-text {
                 text-align: center;
             }
@@ -432,7 +422,7 @@
 
     <header class="neon-bg">
         <div class="container">
-            <h1 class="neon-text">DHARANI M</h1>
+            <h1 class="neon-text">DHARANI M </h1>
             <nav>
                 <ul>
                     <li><a href="#about" class="neon-link">About</a></li>
@@ -452,10 +442,10 @@
                     <img src="Pic.jpg" alt="Dharani M Profile Picture" class="profile-image">
                 </div>
                 <div class="hero-text">
-                    <p class="subtitle neon-text-light">Electrical and Electronics Engineering Graduate</p>
+                    <p class="subtitle neon-text-light">Electrical and Electronics Engineering Graduate </p>
                     <h2 class="title">Seeking a role in Data Analysis & Front-End Development.</h2>
                     <p class="career-objective">
-                        Electrical and Electronic Engineering graduate with a strong IT foundation, skilled in data interpretation, SQL, and creating responsive web interfaces using HTML, CSS, and JavaScript.
+                        Electrical and Electronic Engineering graduate with a strong IT foundation , skilled in data interpretation, SQL, and creating responsive web interfaces using HTML, CSS, and JavaScript.
                     </p>
                     <a href="#contact" class="cta-button neon-button">Let's Connect</a>
                 </div>
@@ -465,19 +455,19 @@
 
     <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title neon-text">AREAS OF FOCUS</h2>
+            <h2 class="section-title neon-text">AREAS OF FOCUS </h2>
             <div class="focus-grid">
                 <div class="focus-item">
                     <i class="fas fa-chart-line focus-icon neon-glow"></i>
-                    <h3>Data Analyst</h3>
+                    <h3>Data Analyst </h3>
                 </div>
                 <div class="focus-item">
                     <i class="fas fa-laptop-code focus-icon neon-glow"></i>
-                    <h3>Web development</h3>
+                    <h3>Web development </h3>
                 </div>
                 <div class="focus-item">
                     <i class="fas fa-drafting-compass focus-icon neon-glow"></i>
-                    <h3>UI/UX Design</h3>
+                    <h3>UI/UX Design </h3>
                     <p class="small-text">(Hobby)</p>
                 </div>
             </div>
@@ -486,37 +476,37 @@
 
     <section id="skills" class="section dark-bg-alt">
         <div class="container">
-            <h2 class="section-title neon-text">TECHNICAL SKILLS</h2>
+            <h2 class="section-title neon-text">TECHNICAL SKILLS </h2>
             <div class="skills-grid">
                 <div class="skill-category">
                     <h3 class="category-title neon-text-light">Programming & Data</h3>
                     <ul class="skill-list">
-                        <li><span class="skill-tag">Python</span></li>
-                        <li><span class="skill-tag">SQL</span></li>
-                        <li><span class="skill-tag">Pandas</span></li>
-                        <li><span class="skill-tag">NumPy</span></li>
-                        <li><span class="skill-tag">Matplotlib</span></li>
+                        <li><span class="skill-tag">Python </span></li>
+                        <li><span class="skill-tag">SQL </span></li>
+                        <li><span class="skill-tag">Pandas </span></li>
+                        <li><span class="skill-tag">NumPy </span></li>
+                        <li><span class="skill-tag">Matplotlib </span></li>
                     </ul>
                 </div>
                 <div class="skill-category">
                     <h3 class="category-title neon-text-light">Web & Front-End</h3>
                     <ul class="skill-list">
-                        <li><span class="skill-tag">HTML5</span></li>
-                        <li><span class="skill-tag">CSS3</span></li>
-                        <li><span class="skill-tag">JavaScript</span></li>
-                        <li><span class="skill-tag">Bootstrap</span></li>
-                        <li><span class="skill-tag">React.js</span></li>
-                        <li><span class="skill-tag">Responsive Web Design</span></li>
+                        <li><span class="skill-tag">HTML5 </span></li>
+                        <li><span class="skill-tag">CSS3 </span></li>
+                        <li><span class="skill-tag">JavaScript </span></li>
+                        <li><span class="skill-tag">Bootstrap </span></li>
+                        <li><span class="skill-tag">React.js </span></li>
+                        <li><span class="skill-tag">Responsive Web Design </span></li>
                     </ul>
                 </div>
                 <div class="skill-category">
                     <h3 class="category-title neon-text-light">Tools & Databases</h3>
                     <ul class="skill-list">
-                        <li><span class="skill-tag">Power BI</span></li>
-                        <li><span class="skill-tag">Tableau</span></li>
-                        <li><span class="skill-tag">MySQL</span></li>
-                        <li><span class="skill-tag">PostgreSQL</span></li>
-                        <li><span class="skill-tag">Git, GitHub</span></li>
+                        <li><span class="skill-tag">Power BI </span></li>
+                        <li><span class="skill-tag">Tableau </span></li>
+                        <li><span class="skill-tag">MySQL </span></li>
+                        <li><span class="skill-tag">PostgreSQL </span></li>
+                        <li><span class="skill-tag">Git, GitHub </span></li>
                     </ul>
                 </div>
             </div>
@@ -525,26 +515,26 @@
 
     <section id="projects" class="section">
         <div class="container">
-            <h2 class="section-title neon-text">FEATURED PROJECTS</h2>
+            <h2 class="section-title neon-text">FEATURED PROJECTS </h2>
 
             <div class="project-card neon-border">
-                <h3 class="project-title">CdTe/Cds based solar cell with Al-ZnO buffer layer using SCAPS-1D <span class="project-year">(2024-Completed)</span></h3>
+                <h3 class="project-title">CdTe/Cds based solar cell with Al-ZnO buffer layer using SCAPS-1D <span class="project-year">(2024-Completed) </span></h3>
                 <p class="project-description">
                     Simulated CdTe/CdS solar cells with Al-ZnO buffer layer using SCAPS-1D to enhance efficiency and analyze charge carrier transport.
                 </p>
             </div>
 
             <div class="project-card neon-border">
-                <h3 class="project-title">A Novel Street Light with Surveillance <span class="project-year">(2023-Completed)</span></h3>
+                <h3 class="project-title">A Novel Street Light with Surveillance <span class="project-year">(2023-Completed) </span></h3>
                 <p class="project-description">
                     Developed a solar-powered street light system with fault detection, real-time monitoring, surveillance, and power consumption estimation using ESP32 and Arduino.
                 </p>
             </div>
 
             <div class="project-card neon-border">
-                <h3 class="project-title">IoT Based Dual Axis Solar Tracking System <span class="project-year">(2022-Completed)</span></h3>
+                <h3 class="project-title">IoT Based Dual Axis Solar Tracking System <span class="project-year">(2022-Completed) </span></h3>
                 <p class="project-description">
-                    Designed and developed a dual-axis solar tracker using Arduino and servo motors, achieving **81.68% higher efficiency** compared to static panels.
+                    Designed and developed a dual-axis solar tracker using Arduino and servo motors, achieving 81.68% higher efficiency compared to static panels.
                 </p>
             </div>
         </div>
@@ -556,20 +546,20 @@
 
             <div class="education-grid">
                 <div class="edu-item">
-                    <h3 class="edu-title">B.E - Electrical and Electronics Engineering</h3>
-                    <p class="edu-detail">Sri Ramakrishna Engineering College, Coimbatore</p>
-                    <p class="edu-detail">2020-2024 | CGPA: 7.94</p>
+                    <h3 class="edu-title">B.E - Electrical and Electronics Engineering </h3>
+                    <p class="edu-detail">Sri Ramakrishna Engineering College, Coimbatore </p>
+                    <p class="edu-detail">2020-2024 | [cite_start]CGPA: 7.94 </p>
                 </div>
                 <div class="edu-item">
-                    <h3 class="edu-title">Certifications</h3>
+                    <h3 class="edu-title">Certifications </h3>
                     <ul class="cert-list">
-                        <li>Artificial Intelligence</li>
-                        <li>Cloud Computing</li>
-                        <li>Robotics Process Automation</li>
+                        <li>Artificial Intelligence </li>
+                        <li>Cloud Computing </li>
+                        <li>Robotics Process Automation </li>
                     </ul>
                 </div>
                 <div class="edu-item">
-                    <h3 class="edu-title">Industrial Internships</h3>
+                    <h3 class="edu-title">Industrial Internships </h3>
                     <ul class="cert-list">
                         <li>15 Days Internship on CRI Pumps.</li>
                         <li>15 Days Internship on RR Rewinding.</li>
@@ -586,12 +576,12 @@
             <div class="contact-info">
                 <p>
                     <a href="mailto:dharanimuthuselvan31@gmail.com" class="contact-link neon-link">
-                        <i class="fas fa-envelope contact-icon"></i> dharanimuthuselvan31@gmail.com
+                        <i class="fas fa-envelope contact-icon"></i> dharanimuthuselvan31@gmail.com 
                     </a>
                 </p>
                 <p>
                     <a href="tel:+917904631827" class="contact-link neon-link">
-                        <i class="fas fa-phone contact-icon"></i> +91 7904631827
+                        <i class="fas fa-phone contact-icon"></i> +91 7904631827 
                     </a>
                 </p>
                 <p>
