@@ -67,9 +67,19 @@
             z-index: 100;
             border-bottom: 1px solid var(--neon-blue);
             box-shadow: var(--border-glow);
-            /* Add transition for smooth height change on scroll-down mobile view */
             transition: all 0.3s ease-in-out;
         }
+
+        /* NEW: Desktop Header Shrink on Scroll */
+        header.desktop-scrolled nav {
+            padding: 0.5rem 1.5rem; /* Reduce vertical padding */
+            min-height: 50px;
+        }
+        
+        header.desktop-scrolled nav .logo {
+            font-size: 1.5rem; /* Slightly smaller logo */
+        }
+        /* End NEW Desktop Header Shrink */
 
         nav {
             max-width: 1200px;
@@ -78,8 +88,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 1.5rem;
-            /* Added min-height to ensure the logo is visible before scroll */
-            min-height: 60px; 
+            min-height: 60px;
+            transition: all 0.3s ease-in-out; /* Added for desktop shrink */
         }
 
         nav .logo {
@@ -87,15 +97,15 @@
             font-weight: 700;
             color: var(--light-text);
             text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+            transition: font-size 0.3s ease-in-out; /* Added for desktop shrink */
         }
 
         nav ul {
             list-style: none;
             display: flex;
             gap: 25px;
-            /* Ensure nav links are visible on desktop */
             visibility: visible;
-            max-height: 1000px; /* Large value for smooth transition on mobile */
+            max-height: 1000px;
             overflow: hidden;
             transition: max-height 0.5s ease-in-out, visibility 0.5s ease-in-out;
         }
@@ -208,6 +218,8 @@
             box-shadow: var(--border-glow);
             backdrop-filter: blur(5px);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex; /* Added for consistent card height in projects */
+            flex-direction: column; /* Added for consistent card height in projects */
         }
 
         .card:hover {
@@ -284,14 +296,15 @@
             color: #aaa;
         }
 
-        /* 🔽 Responsive Styles for Screens <= 588px */
+        /* 🔽 Responsive Styles for Screens <= 588px (Mobile) */
         @media screen and (max-width: 588px) {
             nav {
                 flex-direction: column;
                 align-items: flex-start;
                 padding: 1rem;
-                /* Adjust padding to look better when collapsed */
-                padding-bottom: 10px; 
+                padding-bottom: 10px;
+                /* Reset desktop shrink padding/min-height for mobile */
+                min-height: 60px;
             }
 
             nav .logo {
@@ -303,9 +316,8 @@
                 flex-direction: column;
                 gap: 15px;
                 width: 100%;
-                /* Default state on mobile when not scrolled down */
-                visibility: visible; 
-                max-height: 250px; 
+                visibility: visible;
+                max-height: 250px;
             }
 
             nav ul li {
@@ -318,7 +330,7 @@
                 padding: 8px 0;
             }
 
-            /* NEW: Class added by JavaScript on scroll */
+            /* Mobile: Class added by JavaScript on scroll */
             header.scrolled nav ul {
                 /* Collapse the navigation menu */
                 max-height: 0;
@@ -340,6 +352,13 @@
             
             header.scrolled nav .logo {
                 margin-bottom: 0;
+                font-size: 1.8rem; /* Restore slightly larger logo for the sticky header */
+            }
+
+            /* Ensure no desktop-scrolled styles interfere on mobile */
+            header.desktop-scrolled {
+                /* Reset any desktop-specific styles */
+                background: rgba(13, 2, 33, 0.8);
             }
 
             .hero-content h1 {
@@ -544,6 +563,11 @@
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
+                // Close mobile menu on click, regardless of scroll state
+                if (mediaQuery.matches) {
+                    header.classList.remove('scrolled');
+                }
+                
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
@@ -562,28 +586,45 @@
         const hiddenElements = document.querySelectorAll('.hidden');
         hiddenElements.forEach((el) => observer.observe(el));
 
-        // NEW: Scroll detection for mobile header collapse
+        // Scroll detection for header adjustments on mobile and desktop
         const header = document.getElementById('main-header');
-        // This is the media query that defines a "mobile screen"
-        const mediaQuery = window.matchMedia('(max-width: 588px)'); 
+        // Define the screen size for mobile view (matches your CSS media query)
+        const mobileMediaQuery = window.matchMedia('(max-width: 588px)');
+        const scrollThreshold = 100; // Pixels to scroll before the header changes
 
         function handleHeaderScroll() {
-            // Check if it's a mobile screen (<= 588px) AND the user has scrolled down (window.scrollY > 100)
-            if (mediaQuery.matches && window.scrollY > 100) { 
-                // Adds the 'scrolled' class, which collapses the navigation <ul> via CSS
-                header.classList.add('scrolled');
+            const isScrolled = window.scrollY > scrollThreshold;
+
+            if (mobileMediaQuery.matches) {
+                // MOBILE VIEW: Collapse navigation
+                if (isScrolled) {
+                    header.classList.add('scrolled');
+                    header.classList.remove('desktop-scrolled'); // Clear desktop style
+                } else {
+                    header.classList.remove('scrolled');
+                }
             } else {
-                // Removes the 'scrolled' class, which expands the navigation <ul> via CSS
-                header.classList.remove('scrolled');
+                // DESKTOP/LARGER VIEW: Subtly shrink header
+                if (isScrolled) {
+                    header.classList.add('desktop-scrolled');
+                    header.classList.remove('scrolled'); // Clear mobile style
+                } else {
+                    header.classList.remove('desktop-scrolled');
+                }
             }
         }
 
         // Run on initial load and whenever the user scrolls
-        handleHeaderScroll(); 
+        handleHeaderScroll();
         window.addEventListener('scroll', handleHeaderScroll);
         
         // Also run if the screen size changes to/from mobile
-        mediaQuery.addEventListener('change', handleHeaderScroll);
+        mobileMediaQuery.addEventListener('change', handleHeaderScroll);
+
+        // Toggle mobile menu on initial load if screen is mobile (optional, ensures correct state)
+        if (mobileMediaQuery.matches && window.scrollY <= scrollThreshold) {
+            header.classList.remove('scrolled');
+        }
 
     </script>
 </body>
